@@ -1,0 +1,17 @@
+Rule: Repeated Authentication Failures from One Source IP
+Threshold: >= 5 failures / 300 seconds grouped by source IP
+
+PASS TC01_normal_success                  expected_alert=False actual_alert=False
+PASS TC02_below_threshold                 expected_alert=False actual_alert=False
+PASS TC03_same_account_guessing           expected_alert=True  actual_alert=True 
+PASS TC04_password_spray                  expected_alert=True  actual_alert=True 
+PASS TC05_spread_over_time                expected_alert=False actual_alert=False
+PASS TC06_distributed_sources             expected_alert=False actual_alert=False
+PASS TC07_shared_nat_false_positive_risk  expected_alert=True  actual_alert=True 
+
+Observed alerts:
+  TC03_same_account_guessing: IP=192.0.2.30, failures=5, users=1, window=2026-10-01T11:00:00Z..2026-10-01T11:03:00Z
+  TC04_password_spray: IP=198.51.100.44, failures=5, users=5, window=2026-10-01T12:00:00Z..2026-10-01T12:03:00Z
+  TC07_shared_nat_false_positive_risk: IP=203.0.113.77, failures=5, users=5, window=2026-10-01T15:00:00Z..2026-10-01T15:03:00Z
+
+Summary: 7/7 test cases passed.

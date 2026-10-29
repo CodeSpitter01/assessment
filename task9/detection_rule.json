@@ -1,0 +1,28 @@
+{
+  "title": "Repeated Authentication Failures from One Source IP",
+  "rule_id": "CL-AUTH-001",
+  "status": "test",
+  "description": "Alert when at least the configured number of failed login events from one source IP fall within a rolling time window.",
+  "scope": {
+    "event_type_field": "event_type",
+    "event_type_value": "login",
+    "result_field": "result",
+    "failure_value": "failure",
+    "source_ip_field": "source_ip",
+    "timestamp_field": "timestamp_utc"
+  },
+  "threshold": 5,
+  "timeframe_seconds": 300,
+  "group_by": ["source_ip"],
+  "severity": "medium",
+  "attack_mapping": ["MITRE ATT&CK T1110 - Brute Force"],
+  "false_positive_notes": [
+    "Shared NAT addresses may aggregate failures from multiple legitimate users.",
+    "Users or automation with stale credentials can generate repeated failures."
+  ],
+  "known_limitations": [
+    "Attempts distributed across multiple source IPs can stay below the per-IP threshold.",
+    "Slow attempts spread beyond the time window may not alert.",
+    "This rule does not by itself detect a successful account compromise."
+  ]
+}

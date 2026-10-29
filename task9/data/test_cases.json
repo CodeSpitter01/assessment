@@ -1,0 +1,30 @@
+{
+  "TC01_normal_success": {
+    "expected_alert": false,
+    "purpose": "A normal success and one isolated failure should not alert."
+  },
+  "TC02_below_threshold": {
+    "expected_alert": false,
+    "purpose": "Four failures in the window are below the threshold of five."
+  },
+  "TC03_same_account_guessing": {
+    "expected_alert": true,
+    "purpose": "Five rapid failures against one account from one IP should alert."
+  },
+  "TC04_password_spray": {
+    "expected_alert": true,
+    "purpose": "Five rapid failures against different accounts from one IP should alert."
+  },
+  "TC05_spread_over_time": {
+    "expected_alert": false,
+    "purpose": "Five failures spread out so no five fit in one rolling window should not alert."
+  },
+  "TC06_distributed_sources": {
+    "expected_alert": false,
+    "purpose": "Four failures from each of two IPs demonstrate the single-IP rule's distributed-attempt blind spot."
+  },
+  "TC07_shared_nat_false_positive_risk": {
+    "expected_alert": true,
+    "purpose": "Five failures behind a shared address should technically alert, but may be benign; validate triage/tuning."
+  }
+}
